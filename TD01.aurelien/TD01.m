@@ -1,11 +1,11 @@
-%% EXERCICE 1 : Creation de tableaux, acc??s ?? un ??l??ment
+%% EXERCICE 1 : Creation de tableaux, accès à un élément
 
 % A tester
 % 
 % % L'espace ou la virgule sont equivalents pour definir les tableaux.
 % 
 
-% L1 = [10 20 30 40];
+% L1 = [10 20 30 40]
 % L2 = [5, 10, 15, 20]
  
 % 
@@ -13,7 +13,7 @@
 % % Le point virgule permet de passer a la ligne suivante.
 % 
 
- C1 = [10; 20; 30; 40]
+% C1 = [10; 20; 30; 40]
 
  
 %
@@ -27,15 +27,15 @@
 % % definition d'une matrice 3x3
 %
  
- M1 = [ 10 20 30 ; 40 50 60; 70 80 90];
+% M1 = [ 10 20 30 ; 40 50 60; 70 80 90]
 
 % 
 % % taille d'un tableau
 % 
 
 % size(L1)
- size(C1)
- size(M1)
+% size(C1)
+% size(M1)
 
 % 
 % % La taille obtenue est un vecteur ligne
@@ -47,8 +47,8 @@
 % size(L1, 2)
  
 % size(C1, 1)
- 
 % size(C1, 2)
+ 
 % nbLig = size(M1, 1)
 % nbCol = size(M1, 2)
 
@@ -103,7 +103,7 @@
  
 % M4 = ones(2,4)
 
-% Id = eye(3,3) % tableau 2x3 rempli de 0 avec 1 sur diagonale depuis haut gauche 
+% Id = eye(2,3) % tableau 2x3 rempli de 0 avec 1 sur diagonale depuis haut gauche 
 
 %
 % % Tableau de valeurs parcourant un intervalle
@@ -111,12 +111,12 @@
  
 % V1 = 1:10 % pas entier de 1 par defaut
 
-% V2 = 1:0.2:5 % pas decimal de 0,2 jusqu'a 5
+% V2 = 1:0.2:5
 
 % M5 = [1:1:5;2:1:6]
 
 %
-% %  Creer un tableau ?? partir de ses lignes
+% %  Creer un tableau à partir de ses lignes
 % 
 
 % T1 = [5 1 3]
@@ -128,7 +128,7 @@
 % M6 =  vertcat(T1, T2, T3)
 
 % 
-% % Concat??ner des tableaux 1D
+% % Concaténer des tableaux 1D
 %
 
 % M7 = [T1 T2 T3]
@@ -141,56 +141,43 @@
 % % Dupliquer une matrice
 % 
  
- M8 = [1 2 3 ; 4 5 6]
- 
- M9 = repmat(M8, 3, 2)
+%M8 = [1 2 3 ; 4 5 6]
+%M9 = repmat(M8, 3, 2)
 
 %  
 % % Redimensionner une matrice
 % % le nombre d'elements est le meme avant et apres
 % % le parcours colonne par colonne donne la meme suite d'elements
 %
- M10 = reshape(M9, size(M9,2)/2, size(M9,1)*2)
 
-
-% M56 = [0 1 2 ; 3 4 5 ] 
-% M11 = reshape(M8, 2, 6)
+%M10 = reshape(M9, size(M9,2)/2, size(M9,1)*2)
 
 % 
 % % Creer un tableau aleatoirement.
 %  
 
-% V3 = rand(2, 10) % parametres = dimension du tableau
+% V3 = rand(1, 10) % parametres = dimension du tableau
 
 % M11 = rand(5, 3)
 
- M12 = randi(10, 1, 20)
+% M12 = randi(50, 1, 20)
 
 
 %% EXERCICE 2 : Trier un tableau 
 
 % A tester
- %V3 = randi(10, 3)
 
- %V4 = sort(V3)
+% V4 = sort(V3)
 
- %M13 = reshape(V4, 3, 3)
+% M13 = reshape(V4, 2, 5)
 
- %sort(V3, 1) % chaque colonne est tri??e
+% sort(M11, 1) % chaque colonne est triée
 
- %sort(V3, 2) % chaque ligne est tri??e
+% sort(M11, 2) % chaque ligne est triée
+
 
 % A ecrire
 % ...
-
- %M = randi(20, 4, 9)
-
- %h = size(M, 1)
- %w = size(M, 2)
-
- %V = reshape(M, 1, h*w)
-
- %V = sort(V)
 
  
 %% EXERCICE 3 : Indexation logique
@@ -200,43 +187,27 @@
 % % Chercher des elements dans un tableau, B1 est un tableau de booleens
 % 
 
-%V5 = randi(25,2,200)
-%B1 = V5>20
+% V5 = randi(25,1,200)
+% B1 = V5>20
 
 % 
 % % V6 contient les valeurs de V5 qui sont superieures a 20
 %
 
-%V6 = V5(B1)
+% V6 = V5(B1)
 % ou
-%V6 = V5(V5>20)
+% V6 = V5(V5>20)
 
 %
 % % Index contient les indices dans V5 ou les elements sont superieurs a 20. 
 %
-%Index = find(V5 > 20)
+% Index = find(V5 > 20)
 
 % A ecrire
 %...
 
 
-Va = randi(50, 1, 3)
-Vb = randi(50, 1, 3)
-
-Vmax = max(Va, Vb)
-
-P = Va > Vb
-
-v1 = P.*Va
-v2 = ~P.*Vb
-
-v1(find(v1==0))=1
-v2(find(v2==0))=1
-
-vmax = v1.*v2
-
-
-%% EXERCICE 4 : op??rations arithm??tiques sur vecteurs et matrices
+%% EXERCICE 4 : opérations arithmétiques sur vecteurs et matrices
 
 % A tester
 
@@ -256,7 +227,7 @@ vmax = v1.*v2
 %   Mat4 = Mat1 - Mat2
    
 %
-% % Somme des ??l??ments d'une matrice
+% % Somme des éléments d'une matrice
 % 
 
 % S1 = sum(VecLigne)
@@ -299,15 +270,13 @@ vmax = v1.*v2
 % A tester
 
 %
-% % Affichage d'une courbe d??finie par les coordonn??es de ses points
+% % Affichage d'une courbe définie par les coordonnées de ses points
 %
 
- X = -10:0.1:10;
- % Y = normpdf(X, 2, 1);
- vd = [1 2]
- p = [1 1]
- Y = vd
- plot(X, Y)
+% X = -10:0.1:10;
+% Y = normpdf(X, 0, 1);
+
+% plot(X, Y)
 % ou 
 % plot(X, Y, 'g--x')
 % ou 
