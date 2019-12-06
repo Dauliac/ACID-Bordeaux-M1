@@ -1,12 +1,12 @@
-function [Train,Test] = extractTestAndTrain(GT, sizeTrain)
+function [Train,Test] = extractTestAndTrain(VT, sizeTrain)
 
-    sizeGT= size(GT,1);
+    sizeVT = size(VT,1)
     
-    Indices      = randperm(sizeGT);
+    Indices      = randperm(sizeVT);
     TrainIndices = Indices(1:sizeTrain);
-    TestIndices  = Indices(sizeTrain+1:sizeGT);
+    TestIndices  = Indices(sizeTrain+1:sizeVT);
         
-    Train    = GT(TrainIndices,:);
-    Test     = GT(TestIndices,:);
+    Train    = VT(TrainIndices,:);
+    Test     = VT(TestIndices,:);
 end
 

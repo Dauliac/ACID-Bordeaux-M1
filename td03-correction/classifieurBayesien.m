@@ -11,7 +11,6 @@ sizeVTBar= size(VTBar, 1)
 pBar=sizeVTBar/(sizeVTBar+sizeVTSaumon);
 pSaumon=sizeVTSaumon/(sizeVTBar+sizeVTSaumon);
 
-
 figure(1)
 histogram(VTSaumon);
 hold on
@@ -34,20 +33,20 @@ for i=1:nbIter
         [modelBar] = trainModel(TrainBar);
        
         % ML (maximum de vraissemblance)
-        ResBar    =    myClassify(TestBar,modelBar, modelSaumon, 0.5, 0.5, "B", "S");
-        ResSaumon =    myClassify(TestSaumon,modelBar, modelSaumon, 0.5, 0.5, "B", "S");
-        SaumonError = computeError(ResSaumon, "S");
-        BarError = computeError(ResBar, "B");
+        ResBar    =    maximumVraissemblance(TestBar,modelBar, modelSaumon, 0.5, 0.5, 'B', 'S');
+        ResSaumon =    maximumVraissemblance(TestSaumon,modelBar, modelSaumon, 0.5, 0.5, 'B', 'S');
+        SaumonError = computeError(ResSaumon, 'S');
+        BarError = computeError(ResBar, 'B');
         
         errorSaumonML(i) = SaumonError*100;
         errorBarML(i) = BarError*100;
         errorML(i) = (length(TestSaumon) * errorSaumonML(i) + length(TestBar) *  errorBarML(i) )/ (length(TestSaumon) + length(TestBar));
         
         % MAP (utilisation des proba a priori)
-        ResBar    =    myClassify(TestBar,modelBar, modelSaumon, pBar, pSaumon, "B", "S");
-        ResSaumon =    myClassify(TestSaumon,modelBar, modelSaumon, pBar, pSaumon, "B", "S");
-        SaumonError = computeError(ResSaumon, "S");
-        BarError = computeError(ResBar, "B");
+        ResBar    =    maximumVraissemblance(TestBar,modelBar, modelSaumon, pBar, pSaumon, 'B', 'S');
+        ResSaumon =    maximumVraissemblance(TestSaumon,modelBar, modelSaumon, pBar, pSaumon, 'B', 'S');
+        SaumonError = computeError(ResSaumon, 'S');
+        BarError = computeError(ResBar, 'B');
         errorSaumonMAP(i) = SaumonError*100;
         errorBarMAP(i) = BarError*100;
         errorMAP(i) = (length(TestSaumon) * errorSaumonMAP(i) + length(TestBar) *  errorBarMAP(i) )/ (length(TestSaumon) + length(TestBar));
@@ -78,4 +77,3 @@ plot(1:nbIter, errorSaumonMAP)
 plot(1:nbIter, errorMAP, 'k')
 hold off
 ylim([0 100])
-
