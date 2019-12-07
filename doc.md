@@ -3,7 +3,7 @@ fprintf: Afficher ex: ('mu: %s\n',muVector)
 scatter: afficher un graphique avec des points pour les données (X,Y)
 zeros: Créer un tableau de 0 (nb dimensions)
 Transpose: '
-find: 
+find:
 regress: y X Attention, la première col de x c'est que des 1
 eig: Retourne vect propre, valeurs propre de la matrice de cov, la diag de la cov. Pour acp on ne prend que la valeur propre
 eigs: prend le nombre de valeurs propre à garder
@@ -42,11 +42,11 @@ Train = R(lastRow+1:end, :);
 function [Train,Test] = extractTestAndTrain(GT, sizeTrain)
 
     sizeGT= size(GT,1);
-    
+
     Indices      = randperm(sizeGT);
     TrainIndices = Indices(1:sizeTrain);
     TestIndices  = Indices(sizeTrain+1:sizeGT);
-        
+
     Train    = GT(TrainIndices,:);
     Test     = GT(TestIndices,:);
 end
@@ -79,16 +79,66 @@ fprintf('Il y a %s descripteur', nbDescripteur)
 P(A|B)=P(B|A)*P(A)/P(B)
 
 ## maximum de vraissemblance
-On donne pour P(A) une valeur choisie:
-Si y'a 2 choix on prend souvent 0.5: 50/50
-
-## A priori
-On utilise la lois normale pour avoir la proportion.
+```
+|VT| : nombre de données
+```
 
 ```
-Calcul lois normale, et on tri par rapport à P(C1|f=x)
-Si P(C1|f=x) >  P(C2|f=x)
+NC1: nombre de C1
+NC2: nombre de C2
+```
+
+On calcul la probabilité d'obtenir `C1` ou `C2`
+
+```
+P(C1)=NC2/|VT|
+P(C2)=NC2/|VT|
+```
+
+```
+SI P(C1) > P(C2) alors
     C1
+SINON
+    C2
+```
+méthode stupide
+
+## maximum à priori
+```
+P(C1): cf maximum vraissemblance
+P(C2): cf maximum vraissemblance
+
+mu: Calculer la moyenne de C1
+sigma: Calculer la variance de C2
+```
+
+- On calcule les 2 lois normale NC1 NC2
+On cherche le seuil pour lequel x => NC2(x) = NC1(x). Le moment ou les courbes se croisent.
+
+```
+Si X < seuil, alors
+    NC1
+Sinon
+    NC2
+```
+
+## à posteriori
+P(A|B)=P(B|A)*P(A)/P(B)
+
+P(C1|f=x)=P(f=x|f=x)*P(C1)/P(B)
+
+P(B): disparait car il est commun à P(C1|f=x) et P(C2|f=x)
+
+### On cherche donc
+P(C1|f=x)=P(f=x|C1)*P(C1)
+
+P(C1): CE maximum vraissemblance
+
+P(f=x|C1): Calculer la valeur de la lois normale pour f=x
+
+```
+Si P(f=x|C1)*P(C1) > P(f=x|C2)P(C2) alors
+    C2
 Sinon
     C2
 ```
