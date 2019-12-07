@@ -1,5 +1,5 @@
 function [ratio] = computeError(Res, expectedLabel)
-    % Sum unexpected label
+    % Sum 
     nbErrors = sum(Res ~= expectedLabel);
     ratio = nbErrors / length(Res);
 end

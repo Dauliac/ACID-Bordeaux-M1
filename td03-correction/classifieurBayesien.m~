@@ -30,6 +30,7 @@ for i=1:nbIter
         [TrainSaumon,TestSaumon] = extractTestAndTrain(VTSaumon, sizeTrain);
         [TrainBar, TestBar] = extractTestAndTrain(VTBar, sizeTrain);
         [modelSaumon] = trainModel(TrainSaumon);
+        fprintf('TGGGGG %s\n', modelSaumon.mu)
         [modelBar] = trainModel(TrainBar);
        
         % ML (maximum de vraissemblance)

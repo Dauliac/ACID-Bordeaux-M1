@@ -25,21 +25,22 @@ R=rand(n,m)
 # Exctract jeu de test et jeu d'entrainement
 ##Select first 10% from matrix
 ```matlab
+Dataset=
 % Determine how many rows 10% is.
-[rows, columns] = size(R);
+rows = size(Dataset,1);
 % Determine the last row number of the top  (upper) 10% of rows.
-lastRow = int32(floor(0.1 * rows));
+lastTestRow = int32(floor(0.1 * rows));
 % Get first 10% into one array M:
-Test = R(1:lastRow, :);
+Test = Dataset(1:lastTestRow, :);
 % Get the rest into one array N:
-Train = R(lastRow+1:end, :);
+Train = Dataset(lastTestRow+1:end, :);
 ```
 
 ## Extraire le test pour les `sizeTrain` premiers
 ```matlab
 % Test: jeu de test
 % Train: jeu d'entrainement
-function [Train,Test] = extractTestAndTrain(GT, sizeTrain)
+function [Train,Test] = extractTestAndTrain(VT, sizeTrain)
 
     sizeGT= size(GT,1);
 
@@ -81,7 +82,8 @@ P(A|B)=P(B|A)*P(A)/P(B)
 ## maximum de vraissemblance
 ```
 |VT| : nombre de données
-```
+```P(C1|f=x)=P(f=x|C1)*P(C1)
+
 
 ```
 NC1: nombre de C1
@@ -125,14 +127,14 @@ Sinon
 ## à posteriori
 P(A|B)=P(B|A)*P(A)/P(B)
 
-P(C1|f=x)=P(f=x|f=x)*P(C1)/P(B)
+P(C1|f=x)=P(f=x|C1)*P(C1)/P(f=x)
 
 P(B): disparait car il est commun à P(C1|f=x) et P(C2|f=x)
 
 ### On cherche donc
 P(C1|f=x)=P(f=x|C1)*P(C1)
 
-P(C1): CE maximum vraissemblance
+P(C1): Cf maximum vraissemblance ou définie au pif 50/50
 
 P(f=x|C1): Calculer la valeur de la lois normale pour f=x
 
