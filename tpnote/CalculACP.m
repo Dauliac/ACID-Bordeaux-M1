@@ -1,11 +1,13 @@
-function [ V ] = calculPCA( C1, C2 )
-    P = [C1; C2];
-    mu = mean([C1; C2]);
-    C = P - repmat(mu, size(P, 1), 1);
-    Cl1 = C1 - repmat(mu, size(C1, 1), 1);
-    Cl2 = C2 - repmat(mu, size(C2, 1), 1);
-    %Cl3 = C3 - repmat(mu, size(C3, 1), 1);
-
-    S = (size(C, 1) - 1) * cov(C);
-    [V, lambda] = eigs(S);
+function [ V ] = CalculACP( Echantillon )
+ M = cov(Echantillon);
+ [VecteurPropre, ValeurPropre] = eig(M);
+ % trier les valeurs propres de la plus grande a la plus petite
+ [SortedLambda, indices] = sort(diag(ValeurPropre), 'descend');
+ % renvoyer les vecteurs propres dans le même ordre
+ V = VecteurPropre(:, indices);
+ 
+% on appelle d la dimension réduite 
+% pour obtenir la matrice de projection il faut sélectionner 
+% les d 1ers vecteurs du résultat de cette fonction avec :
+% W = V(:, 1:d);
 end
