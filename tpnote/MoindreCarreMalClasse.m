@@ -1,4 +1,4 @@
-function [ errorNumber ] = malClasse( M )
+function [ errorNumber ] = MoindreCarreMalClasse( M )
 %NEGATIVEINMATRIX Summary of this function goes here
 %   Detailed explanation goes here
 
