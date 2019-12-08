@@ -1,4 +1,4 @@
-function [ V ] = CalculACP( Echantillon )
+function [ V, indices ] = CalculACP( Echantillon )
  M = cov(Echantillon);
  [VecteurPropre, ValeurPropre] = eig(M);
  % trier les valeurs propres de la plus grande a la plus petite
