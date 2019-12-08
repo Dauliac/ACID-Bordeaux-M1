@@ -39,17 +39,6 @@ errorMCC2 = zeros(nbIter, 1);
 
 x=[-50 60]
 
-%%%% ACP %%%%
-[VectProp] = CalculACP(TrainC1, TrainC2);
-x1=-20:20;
-pointsACP = droite2DVd(VectProp, x1);
-plot(x1, pointsACP, 'r');
-
-%%%% ACI %%%%
-[VectProp] = CalculACI(TrainC1, TrainC2);
-pointsACP = droite2DVd(VectProp, x1);
-plot(x1, pointsACP, 'g');
-    
 for i=1:nbIter
     
     [TrainC1,TestC1] = extractTestAndTrain(C1, sizeTrainC1);
@@ -61,16 +50,34 @@ for i=1:nbIter
     TestC1Size = length(TestC1);
     TestC2Size = length(TestC2);
     TestSize = TestC2Size + TestC2Size;
+    
+    %%%% ACP %%%%
+    
+%     figure('Name', 'ACP');
+%     scatter(VTBar(:,1), VTBar(:,2));
+%     hold on;
+%     scatter(VTSaumon(:,1), VTSaumon(:,2));
 
+    VT = [TrainC1; TrainC2];
+    VectProp = CalculACP(VT);
+
+    x=0:20;
+    y=0:0;
+
+    pointsACP = droite2DVd(x, Vacp, mu);
+    plot(x, pointsACP, 'r');
+
+    
     % MAP (utilisation des proba a priori)
     
-    ResC2 = myClassify(TestC2,modelC2, modelC1, pC2, pC1, '2', '1');
-    ResC1 = myClassify(TestC1,modelC2, modelC1, pC2, pC1, '2', '1');
-    C1Error = computeError(ResC1, '1');
-    C2Error = computeError(ResC2, '2');
-    errorC1MAP(i) = C1Error*100;
-    errorC2MAP(i) = C2Error*100;
-    errorMAP(i) = (TestC1Size * errorC1MAP(i) + TestC2Size *  errorC2MAP(i) )/ TestSize;
+        ResC2 = myClassify(TestC2,modelC2, modelC1, pC2, pC1, '2', '1');
+        ResC1 = myClassify(TestC1,modelC2, modelC1, pC2, pC1, '2', '1');
+        C1Error = computeError(ResC1, '1');
+        C2Error = computeError(ResC2, '2');
+        errorC1MAP(i) = C1Error*100;
+        errorC2MAP(i) = C2Error*100;
+        errorMAP(i) = (TestC1Size * errorC1MAP(i) + TestC2Size *  errorC2MAP(i) )/ TestSize;
+        
 
     % MOINDRE CARREES
     MDataSize(i) = TestC1Size+TestC2Size;
@@ -78,7 +85,8 @@ for i=1:nbIter
     [MC1 MC2]=createMatrix(TestC1,TestC2);
     M=[MC1 MC2*-1];
 
-    Z=transpose(M);   
+    Z=transpose(M);
+   
     
     b=ones(size(Z,1),1);
     b=ones(size(Z,1),1);
@@ -94,10 +102,12 @@ for i=1:nbIter
     %errorMC(i) = malClasse(res)*100/TestSize;
     errorMC(i) = (TestC1Size * errorMCC1(i) + TestC2Size *  errorMCC2(i) )/ TestSize;
 
+
     %/(size(TestC1,1)+size(TestC2,1));
     
     y=(-w(1)-w(2)*x)/w(3);
-    plot(x,y)    
+    plot(x,y)
+    
     
 end;
 

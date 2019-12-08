@@ -1,22 +1,11 @@
-function [V] = CalculACP(VT)
+function [ V ] = calculPCA( C1, C2 )
+    P = [C1; C2];
+    mu = mean([C1; C2]);
+    C = P - repmat(mu, size(P, 1), 1);
+    Cl1 = C1 - repmat(mu, size(C1, 1), 1);
+    Cl2 = C2 - repmat(mu, size(C2, 1), 1);
+    %Cl3 = C3 - repmat(mu, size(C3, 1), 1);
 
-    %%% Deux methodes vues : %%%
-    
-    % 1ere methode :
-%     VT = VT - mean(VT); %VT = (VT - mean(VT)./sqrt(var(VT));
-%     %ACP%
-%     n = size(VT,1);
-%     scattern = (n-1)*cov(VT);
-%     [VectProp, ValProp] = eigs(scattern);
-%  
-%     [sortedVectProp, indices] = sort(diag(ValProp), 'descend');
-%     V = VectProp(:,indices(1:1));
-    
-    % 2eme methode :
-    M = cov(VT);
-    [VectProp, ValProp] = eigs (M);
-    % trier les valeurs propres de la plus grande a la plus petite
-    [SortedLambda, indices] = sort(diag(ValProp), 'descend');
-    % renvoyer les vecteurs propres dans le m?me ordre
-    V = VectProp(:, indices);
+    S = (size(C, 1) - 1) * cov(C);
+    [V, lambda] = eigs(S);
 end
