@@ -1,6 +1,8 @@
 function [ C1Transformed, C2Transformed ] = createLinearClassMatrices( C1,C2 )
 % Prepare matrix for linear classification
-%   
+% Pour l'utiliser:
+%   [MC1, MC2]=createLinearClassMatrices(TestC1,TestC2);
+%   M=[MC1 -MC2];
     
 C1T=transpose(C1);
 C2T=transpose(C2);
