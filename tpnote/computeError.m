@@ -1,5 +1,4 @@
-function [ratio] = computeError(Res, expectedLabel)
+function [nbErrors] = computeError(Res, expectedLabel)
     nbErrors = sum(Res ~= expectedLabel);
-    ratio = nbErrors / length(Res);
 end
 
