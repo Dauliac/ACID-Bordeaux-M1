@@ -14,11 +14,11 @@ sizeC1 = size(C1, 1);
 sizeC2 = size(C2, 1);
 
 % Display gaussian
-% Si Une des deux donne une droite:
-% inverser C1 et C2 permet de les affichers
 GaussianClass(C1);
 GaussianClass(C2);
-% GaussianCompareClass(C1,C2);
+GaussianCompareClass(C1,C2);
+% Laisser sinon GaussianCompareClass ne s'affiche pas correctement
+GaussianClass(C1);
 
 %probas a priori
 pC1=sizeC1/(sizeC1+sizeC2);
