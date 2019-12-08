@@ -183,7 +183,7 @@ for i=1:nbIter
             % fprintf('Peceptron iteration numero %i\n', j);
 
             Wprev=WPrcpt;
-            WPrcpt=perceptron(Wprev,TestC1,TestC2,coef);
+            WPrcpt=Perceptron(Wprev,TestC1,TestC2,coef);
             if(norm(WPrcpt-Wprev)<=0.01)
                 break
             end
@@ -220,4 +220,3 @@ PlotMCC = plot(1:nbIter, errorMC, 'r');
 legend('Error percentage C1', 'Error percentage C2', 'Error percentage total');
 hold off
 ylim([0 10])%
-

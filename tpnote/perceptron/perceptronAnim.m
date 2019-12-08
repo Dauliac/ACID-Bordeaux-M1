@@ -1,8 +1,8 @@
-function [ nouv ] = Perceptron(w,c1,c2,coef )
+function [ nouv ] = perceptronAnim(w,c1,c2,coef )
 %RECUPERRORS Summary of this function goes here
 % Detailed explanation goes here
 
-[MC1, MC2] = createLinearClassMatrices(c1, c2);
+[MC1, MC2]=createLinearClassMatrices(c1,c2);
 M=[MC1 MC2*-1];
 
 res=transpose(w)*M;
@@ -16,3 +16,5 @@ end
 nouv=w+coef*ind;
 
 end
+
+
